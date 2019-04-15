@@ -46,7 +46,7 @@ $connectionString = "DefaultEndpointsProtocol=https;AccountName=gagalcoding;Acco
 // Create blob client.
 $blobClient = BlobRestProxy::createBlobService($connectionString);
 
-$fileToUpload = $_FILES["fileToUpload"]["name"];
+$fileToUpload = "HelloWorld.txt";
 
 if (!isset($_GET["Cleanup"])) {
     // Create container options object.
