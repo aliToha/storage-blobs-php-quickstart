@@ -1,3 +1,2 @@
 RewriteEngine On
-RewriteBase /
-RewriteRule ^index\.html?$ / [NC,R,L]
+RewriteRule ^index\.htm$ index.php [NC,R]
