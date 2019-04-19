@@ -10,17 +10,6 @@
 </head>
 <body>
 <script>
-function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                $('#sourceImage').attr('src', e.target.result);
-            }
-
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
 $(document).ready(function(e){
     $("#fupForm").on('submit', function(e){
         e.preventDefault();
@@ -68,6 +57,17 @@ $(document).ready(function(e){
 });
 </script>
 <script type="text/javascript">
+	function readURL(input) {
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
+
+				reader.onload = function (e) {
+					$('#sourceImage').attr('src', e.target.result);
+				}
+
+				reader.readAsDataURL(input.files[0]);
+			}
+		}
     function processImage() {
         // **********************************************
         // *** Update or verify the following values. ***
