@@ -26,15 +26,18 @@ $(document).ready(function(e){
             },
             success: function(msg){
                 $('.statusMsg').html('');
-                if(msg == 'success'){
+                /* if(msg == 'success'){
                     $('#fupForm')[0].reset();
-                    $('.statusMsg').html('<span style="font-size:18px;color:#34A853">Form data submitted successfully.</span>');
+                
                 }else{
                     $('.statusMsg').html('<span style="font-size:18px;color:#EA4335">Some problem occurred, please try again.</span>');
-                }
+                } */
+				$('.statusMsg').html('<span style="font-size:18px;color:#34A853">Form data submitted successfully.</span>');
+				$('.bolbContainerName').html(msg['containerName']);
                 $('#fupForm').css("opacity","");
                 $(".submitBtn").removeAttr("disabled");
             }
+			error
         });
     });
 	
@@ -67,6 +70,7 @@ $(document).ready(function(e){
         // Free trial subscription keys are generated in the "westus" region.
         // If you use a free trial subscription key, you shouldn't need to change
         // this region.
+		var containerName = document.getElementById("container").value;
         var uriBase =
             "https://centralus.api.cognitive.microsoft.com/vision/v2.0/analyze";
  
@@ -81,7 +85,7 @@ $(document).ready(function(e){
         var sourceImageUrl = document.getElementById("file").value;
         document.querySelector("#sourceImage").src = sourceImageUrl;
 		var filename = sourceImageUrl.replace(/^.*[\\\/]/, '');
-		var urlBlob = "https://gagalcoding.blob.core.windows.net/blockblobsepckvm/"+filename;
+		var urlBlob = "https://gagalcoding.blob.core.windows.net/"+containerName+"/"+filename;
  
         // Make the REST API call.
         $.ajax({
@@ -118,9 +122,10 @@ $(document).ready(function(e){
 <div class="container">
 <div class="row">
 <div class="col-md-8">
-<h1><a href="#" target="_blank"><img src="logo.png" width="80px"/>Image Analyze Using Azure Vision</a></h1>
+<h1><a href="#" target="_blank"><img src="icon.png" width="80px"/>Image Analyze Using Azure Vision</a></h1>
 <hr> 
 <p class="statusMsg"></p>
+<p class="bolbContainerName" id="container"></p>
 <form enctype="multipart/form-data" id="fupForm" >
     <div class="form-group">
         <label for="file">IMAGE : </label>

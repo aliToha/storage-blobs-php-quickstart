@@ -99,10 +99,10 @@ if (!empty($_FILES['file']['name'])) {
  */
 			do{
 				$result = $blobClient->listBlobs($containerName, $listBlobsOptions);
-				foreach ($result->getBlobs() as $blob)
+				/* foreach ($result->getBlobs() as $blob)
 				{
 					echo $blob->getName().": ".$blob->getUrl()."<br />";
-				}
+				} */
 			
 				$listBlobsOptions->setContinuationToken($result->getContinuationToken());
 			} while($result->getContinuationToken());
@@ -113,7 +113,7 @@ if (!empty($_FILES['file']['name'])) {
 			$blob = $blobClient->getBlob($containerName, $fileToUpload);
 			fpassthru($blob->getContentStream());
 			/* echo "<br />"; */
-			echo 'success';
+			echo json_encode($containerName);
 		}
 		catch(ServiceException $e){
 			// Handle exception based on error codes and messages.
