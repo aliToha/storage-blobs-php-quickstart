@@ -50,6 +50,13 @@ $(document).ready(function(e){
             $("#file").val('');
             return false;
         }
+		var reader = new FileReader();
+		reader.onload = function (e) {
+        // get loaded data and render thumbnail.
+        document.getElementById("sourceImage").src = e.target.result;
+		};
+		// read the image file as a data URL.
+		reader.readAsDataURL(file);
     });
 });
 </script>
@@ -135,8 +142,9 @@ $(document).ready(function(e){
 	<button onclick="processImage()" type="button" class="btn btn-danger submitBtn" disabled>Analyze image</button>
 </form>
 </div>
-</div>
-</div>
 <img id="sourceImage" width="400" />
+<h1></h1>
+</div>
+</div>
 </body>
 </html>

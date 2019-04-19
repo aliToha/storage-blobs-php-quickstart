@@ -24,17 +24,22 @@ $(document).ready(function(e){
                 $('.submitBtn').attr("disabled","disabled");
                 $('#fupForm').css("opacity",".5");
             },
-            success: function(msg){
+			success: function(msg){
                 $('.statusMsg').html('');
-                if(msg == 'success'){
+                /* if(msg == 'success'){
                     $('#fupForm')[0].reset();
-                    $('.statusMsg').html('<span style="font-size:18px;color:#34A853">Form data submitted successfully.</span>');
+                
                 }else{
                     $('.statusMsg').html('<span style="font-size:18px;color:#EA4335">Some problem occurred, please try again.</span>');
-                }
+                } */
+				$('.statusMsg').html('<span style="font-size:18px;color:#34A853">Form data submitted successfully.</span>');
+				$('.bolbContainerName').html(msg['containerName']);
                 $('#fupForm').css("opacity","");
                 $(".submitBtn").removeAttr("disabled");
             }
+			error: function(){
+				 $('.statusMsg').html('<span style="font-size:18px;color:#EA4335">Some problem occurred, please try again.</span>');
+			}
         });
     });
 	
@@ -47,6 +52,13 @@ $(document).ready(function(e){
             $("#file").val('');
             return false;
         }
+		var reader = new FileReader();
+		reader.onload = function (e) {
+        // get loaded data and render thumbnail.
+        document.getElementById("sourceImage").src = e.target.result;
+		};
+		// read the image file as a data URL.
+		reader.readAsDataURL(file);
     });
 });
 </script>
@@ -67,6 +79,7 @@ $(document).ready(function(e){
         // Free trial subscription keys are generated in the "westus" region.
         // If you use a free trial subscription key, you shouldn't need to change
         // this region.
+		var containerName = document.getElementById("container").value;
         var uriBase =
             "https://centralus.api.cognitive.microsoft.com/vision/v2.0/analyze";
  
@@ -97,7 +110,7 @@ $(document).ready(function(e){
             type: "POST",
  
             // Request body.
-            data: '{"url": ' + '"' + sourceImageUrl + '"}',
+            data: '{"url": ' + '"' + urlBlob + '"}',
         })
  
         .done(function(data) {
@@ -118,9 +131,10 @@ $(document).ready(function(e){
 <div class="container">
 <div class="row">
 <div class="col-md-8">
-<h1><a href="#" target="_blank"><img src="logo.png" width="80px"/>Image Analyze Using Azure Vision</a></h1>
+<h1><a href="#" target="_blank"><img src="icon.png" width="80px"/>Image Analyze Using Azure Vision</a></h1>
 <hr> 
 <p class="statusMsg"></p>
+<p class="bolbContainerName" id="container"></p>
 <form enctype="multipart/form-data" id="fupForm" >
     <div class="form-group">
         <label for="file">IMAGE : </label>
@@ -130,8 +144,20 @@ $(document).ready(function(e){
 	<button onclick="processImage()" type="button" class="btn btn-danger submitBtn" disabled>Analyze image</button>
 </form>
 </div>
+<div id="wrapper" style="width:1020px; display:table;">
+    <div id="jsonOutput" style="width:600px; display:table-cell;">
+        Response:
+        <br><br>
+        <textarea id="responseTextArea" class="UIInput"
+                  style="width:580px; height:400px;"></textarea>
+    </div>
+    <div id="imageDiv" style="width:420px; display:table-cell;">
+        Source image:
+        <br><br>
+        <img id="sourceImage" width="400" />
+    </div>
 </div>
 </div>
-<img id="sourceImage" width="400" />
+</div>
 </body>
 </html>
