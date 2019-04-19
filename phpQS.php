@@ -46,7 +46,7 @@ $connectionString = "DefaultEndpointsProtocol=https;AccountName=gagalcoding;Acco
 // Create blob client.
 $blobClient = BlobRestProxy::createBlobService($connectionString);
 if (!empty($_FILES['file']['name'])) {
-	$fileToUpload = '';
+	$fileToUpload = ($_FILES['file']['name']);
 	if(!empty($_FILES["file"]["type"])){
 		// Create container options object.
 		$createContainerOptions = new CreateContainerOptions();
@@ -101,7 +101,7 @@ if (!empty($_FILES['file']['name'])) {
 				$result = $blobClient->listBlobs($containerName, $listBlobsOptions);
 				foreach ($result->getBlobs() as $blob)
 				{
-					echo $blob->getName().": ".$blob->getUrl()."<br />";
+					/* echo $blob->getName().": ".$blob->getUrl()."<br />"; */
 				}
 			
 				$listBlobsOptions->setContinuationToken($result->getContinuationToken());

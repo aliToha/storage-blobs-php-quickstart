@@ -26,7 +26,7 @@ $(document).ready(function(e){
             },
 			success: function(msg){
                 $('.statusMsg').html('');
-                /* if(msg == 'success'){
+                 /*if(msg == 'success'){
                     $('#fupForm')[0].reset();
                 
                 }else{
@@ -51,23 +51,13 @@ $(document).ready(function(e){
             alert('Please select a valid image file (JPEG/JPG/PNG).');
             $("#file").val('');
             return false;
-        }
-		readURL(this);
+        }else{
+			readURL(this);
+		}
     });
 });
 </script>
 <script type="text/javascript">
-	function readURL(input) {
-			if (input.files && input.files[0]) {
-				var reader = new FileReader();
-
-				reader.onload = function (e) {
-					$('#sourceImage').attr('src', e.target.result);
-				}
-
-				reader.readAsDataURL(input.files[0]);
-			}
-		}
     function processImage() {
         // **********************************************
         // *** Update or verify the following values. ***
@@ -96,10 +86,11 @@ $(document).ready(function(e){
         };
  
         // Display the image.
-        var sourceImageUrl = document.getElementById("file").value;
-        document.querySelector("#sourceImage").src = sourceImageUrl;
 		var filename = sourceImageUrl.replace(/^.*[\\\/]/, '');
 		var urlBlob = "https://gagalcoding.blob.core.windows.net/"+containerName+"/"+filename;
+        var sourceImageUrl = document.getElementById("file").value;
+        document.querySelector("#sourceImage").src = urlBlob;
+		
  
         // Make the REST API call.
         $.ajax({
@@ -139,7 +130,7 @@ $(document).ready(function(e){
 <h1><a href="#" target="_blank"><img src="icon.png" width="80px"/>Image Analyze Using Azure Vision</a></h1>
 <hr> 
 <p class="statusMsg"></p>
-<p class="bolbContainerName" id="container"></p>
+<p class="bolbContainerName" id="container">tttttt</p>
 <form enctype="multipart/form-data" id="fupForm" >
     <div class="form-group">
         <label for="file">IMAGE : </label>
