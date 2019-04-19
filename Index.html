@@ -99,7 +99,7 @@ $(document).ready(function(e){
         var sourceImageUrl = document.getElementById("file").value;
         document.querySelector("#sourceImage").src = sourceImageUrl;
 		var filename = sourceImageUrl.replace(/^.*[\\\/]/, '');
-		var urlBlob = "https://gagalcoding.blob.core.windows.net/blockblobsepckvm/"+filename;
+		var urlBlob = "https://gagalcoding.blob.core.windows.net/"+containerName+"/"+filename;
  
         // Make the REST API call.
         $.ajax({
@@ -147,9 +147,7 @@ $(document).ready(function(e){
     </div>
     <input type="submit" name="submit" class="btn btn-danger submitBtn" value="UPLOAD"/>
 	<button onclick="processImage()" type="button" class="btn btn-danger submitBtn" disabled>Analyze image</button>
-</form>
-</div>
-<div id="wrapper" style="width:1020px; display:table;">
+	<div id="wrapper" style="width:1020px; display:table;">
     <div id="jsonOutput" style="width:600px; display:table-cell;">
         Response:
         <br><br>
@@ -161,6 +159,8 @@ $(document).ready(function(e){
         <br><br>
         <img id="sourceImage" width="400" />
     </div>
+</div>
+</form>
 </div>
 </div>
 </div>
