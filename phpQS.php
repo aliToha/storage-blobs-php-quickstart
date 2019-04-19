@@ -99,10 +99,10 @@ if (!empty($_FILES['file']['name'])) {
  */
 			do{
 				$result = $blobClient->listBlobs($containerName, $listBlobsOptions);
-				/* foreach ($result->getBlobs() as $blob)
+				foreach ($result->getBlobs() as $blob)
 				{
 					echo $blob->getName().": ".$blob->getUrl()."<br />";
-				} */
+				}
 			
 				$listBlobsOptions->setContinuationToken($result->getContinuationToken());
 			} while($result->getContinuationToken());
