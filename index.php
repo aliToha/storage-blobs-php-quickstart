@@ -122,7 +122,7 @@ $(document).ready(function(e){
 <div class="container">
 <div class="row">
 <div class="col-md-8">
-<h1><a href="#" target="_blank"><img src="icon.png" width="80px"/>Image Analyze Using Azure Vision</a></h1>
+<h1><a href="#" target="_blank">Image Analyze Using Azure Vision</a></h1>
 <hr> 
 <p class="statusMsg"></p>
 <p class="bolbContainerName" id="container"></p>
