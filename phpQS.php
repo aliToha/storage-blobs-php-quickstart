@@ -60,7 +60,8 @@ if(!empty($_FILES['file']['name'])){
    }else{
 	   echo "filed";
    }
-
        
-} 
+} else{
+	echo "no file selected";
+}
 ?>
