@@ -4,7 +4,11 @@
 <meta charset="utf-8">
 <title>Image Analyze Using Azure Vision</title>
 <link rel="stylesheet" href="style.css" type="text/css" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+<script
+			  src="https://code.jquery.com/jquery-3.4.0.js"
+			  integrity="sha256-DYZMCC8HTC+QDr5QNaIcfR7VSPtcISykd+6eSmBW5qo="
+			  crossorigin="anonymous"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>-->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
 <body>
@@ -37,11 +41,10 @@
  
         // Display the image.
         //var sourceImageUrl = document.getElementById("inputImage").value;
-        //document.querySelector("#sourceImage").src = sourceImageUrl;
-		var name = $('input[type=file]')[0].files[0].name;
+		var name = document.getElementById("nameFile").innerHTML;
 		var sourceImageUrl = "https://gagalcoding.blob.core.windows.net/blobcontainer/"+name;
-		alert(sourceImageUrl);
-		//var name = e.target.files[0].name;
+		document.querySelector("#azureImage").src = sourceImageUrl;
+		alert(sourceImageUrl)
         // Make the REST API call.
         $.ajax({
             url: uriBase + "?" + $.param(params),
@@ -91,7 +94,7 @@
             type: 'POST',
             url: 'phpQS.php',
             data: new FormData(this),
-            contentType: false,
+            contentType:false,
             cache: false,
             processData:false,
             beforeSend: function(){
@@ -101,7 +104,7 @@
             success: function(msg){
                 $('.statusMsg').html('');
 				$('.statusMsg').html('<span style="font-size:18px;color:#34A853">successfully.</span>');
-				$('.bolbContainerName').html(msg['containerName']);
+				$('.nameFile').html(msg);
                 $('#fupForm').css("opacity","");
                 $("#analyze").removeAttr("disabled");
             }
@@ -120,9 +123,10 @@
         }else{
 		readURL(this);
 		$("#submit").removeAttr("disabled");
+		$("#analyze").attr("disabled",true);
+		$("#azureImage").removeAttr("src");
 		}
     });
-	$("#analyze").onclick
 });
 </script>
 <div class="container">
@@ -131,7 +135,7 @@
 <h1><a href="#" target="_blank"><img src="icon.png" width="80px"/>Image Analyze Using Azure Vision</a></h1>
 <hr> 
 <p class="statusMsg"></p>
-<p class="linkBlob"></p>
+<p class="nameFile" id="nameFile"></p>
 <form enctype="multipart/form-data" id="fupForm" >
     <div class="form-group">
         <label for="file">File</label>
@@ -144,6 +148,10 @@
         Source image:
         <br><br>
         <img id="sourceImage" width="400" />
+		<br><br>
+		Image from Azure:
+        <br><br>
+        <img id="azureImage" width="400" />
 </div>
 <div id="jsonOutput" style="width:600px; display:table-cell;">
         Response:
