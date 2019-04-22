@@ -2,7 +2,7 @@
 <head lang="en">
 <meta charset="utf-8">
 <title>Image Analyze Using Azure Vision</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+<script src="/jquery.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
 <body>
@@ -138,12 +138,12 @@
     <input type="submit" name="submit" class="btn btn-danger submitBtn" value="UPLOAD" id="submit"/>
 	<input id="analyze" onclick="processImage()" type="button" class="btn btn-danger submitBtn" value="Analyze Image" disabled />
 </form>
-<div id="imageDiv" style="width:420px; display:table-cell;">
+<div id="imageDiv" style="width:420px; display:table-cell; margin-left:20px">
         Source image:
         <br><br>
         <img id="sourceImage" width="400" />
 		</div>
-<div id="imageDiv" style="width:420px; display:table-cell; margin-left:20px;">
+<div id="imageDiv" style="width:420px; display:table-cell; ">
 		Image from Azure:
         <br><br>
         <img id="azureImage" width="400" style="margin-left:20px;"/>
