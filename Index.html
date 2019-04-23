@@ -37,7 +37,8 @@
 		var name = document.getElementById("nameFile").innerHTML;
 		var sourceImageUrl = "https://gagalcoding.blob.core.windows.net/blobcontainer/"+name;
 		document.querySelector("#azureImage").src = sourceImageUrl;
-	
+		
+		
         // Make the REST API call.
         $.ajax({
             url: uriBase + "?" + $.param(params),
@@ -118,7 +119,7 @@
 		readURL(this);
 		$("#submit").removeAttr("disabled");
 		$("#analyze").attr("disabled",true);
-		$("#azureImage").removeAttr("src");
+		$("#azureImage").attr("src","icon.png");
 		$("#respon").attr("hidden",true);
 		}
     });
@@ -144,10 +145,10 @@
         <br><br>
         <img id="sourceImage" width="400" />
 		</div>
-<div id="imageDiv" style="width:420px; display:table-cell; ">
+<div id="imageDivAzure" style="width:420px; display:table-cell;">
 		Image from Azure:
         <br><br>
-        <img id="azureImage" width="400" style="margin-left:20px;"/>
+        <img id="azureImage" width="400" style="margin-left:20px;" src="icon.png"/>
 </div>
 <div id="respon" hidden>
 		<br><br>
