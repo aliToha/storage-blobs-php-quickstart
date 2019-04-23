@@ -2,7 +2,7 @@
 <head lang="en">
 <meta charset="utf-8">
 <title>Image Analyze Using Azure Vision</title>
-<script src="/jquery.min.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
 <body>
@@ -13,7 +13,7 @@
         // **********************************************
  
         // Replace <Subscription Key> with your valid subscription key.
-        var subscriptionKey = "77ecf1a9069d4c858c7b79c66fdb290d";
+        var subscriptionKey = '77ecf1a9069d4c858c7b79c66fdb290d';
  
         // You must use the same Azure region in your REST API method as you used to
         // get your subscription keys. For example, if you got your subscription keys
@@ -24,7 +24,7 @@
         // If you use a free trial subscription key, you shouldn't need to change
         // this region.
         var uriBase =
-            "https://https://centralus.api.cognitive.microsoft.com/vision/v2.0/analyze";
+            "https://centralus.api.cognitive.microsoft.com/vision/v2.0/analyze";
  
         // Request parameters.
         var params = {
@@ -34,7 +34,6 @@
         };
  
         // Display the image.
-        //var sourceImageUrl = document.getElementById("inputImage").value;
 		var name = document.getElementById("nameFile").innerHTML;
 		var sourceImageUrl = "https://gagalcoding.blob.core.windows.net/blobcontainer/"+name;
 		document.querySelector("#azureImage").src = sourceImageUrl;
@@ -58,7 +57,8 @@
  
         .done(function(data) {
             // Show formatted JSON on webpage.
-            $("#responseTextArea").val(JSON.stringify(data, null, 2));
+           $("#responseTextArea").html(data.description.captions[0].text);
+           $("#respon").removeAttr("hidden");
         })
  
         .fail(function(jqXHR, textStatus, errorThrown) {
@@ -119,6 +119,7 @@
 		$("#submit").removeAttr("disabled");
 		$("#analyze").attr("disabled",true);
 		$("#azureImage").removeAttr("src");
+		$("#respon").attr("hidden",true);
 		}
     });
 });
@@ -148,10 +149,12 @@
         <br><br>
         <img id="azureImage" width="400" style="margin-left:20px;"/>
 </div>
+<div id="respon" hidden>
         Response:
         <br><br>
-        <textarea id="responseTextArea" class="UIInput"
-                  style="width:580px; height:400px;"></textarea>
+        <h1 id="responseTextArea"></h1>
+		<p>this caption made automaticaly by Azure Vision</p>
+</div>
 </div>
 </div>
 </div>
